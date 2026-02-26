@@ -1,0 +1,203 @@
+:root {
+    /* Colors - Primary */
+    --accent-primary: #EC7F13;
+    --accent-hover: #D4710F;
+    --accent-glow: rgba(236, 127, 19, 0.3);
+
+    /* Colors - Dark Theme */
+    --dark-bg: #0A0A0A;
+    --dark-surface: #141414;
+    --dark-surface-elevated: #1A1A1A;
+    --dark-border: rgba(255, 255, 255, 0.08);
+    --dark-text: #FFFFFF;
+    --dark-text-muted: rgba(255, 255, 255, 0.6);
+
+    /* Colors - Light Theme */
+    --light-bg: #FAFAFA;
+    --light-surface: #FFFFFF;
+    --light-border: #E5E5E5;
+    --light-text: #1A1A1A;
+    --light-text-muted: #666666;
+
+    /* Typography */
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+
+    /* Spacing */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 40px;
+    --space-2xl: 60px;
+    --space-3xl: 80px;
+    --space-4xl: 120px;
+
+    /* Shadows */
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --shadow-elevated: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --glow-primary: 0 0 20px rgba(236, 127, 19, 0.4);
+
+    /* Glass */
+    --glass-bg: rgba(20, 20, 20, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-blur: blur(20px);
+
+    /* Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 9999px;
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 250ms ease;
+    --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-bounce: 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-main);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--light-text);
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img,
+video {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section {
+    padding: var(--space-3xl) 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--space-md);
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: var(--light-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    text-decoration: none;
+    font-family: var(--font-main);
+    min-height: 44px;
+    gap: var(--space-sm);
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--glow-primary);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--light-border);
+    color: var(--light-text);
+}
+
+.btn-outline:hover {
+    border-color: var(--light-text);
+    background: var(--light-surface);
+}
+
+.btn-outline-light {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-large {
+    padding: 16px 36px;
+    font-size: 1.05rem;
+    min-height: 52px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .section {
+        padding: var(--space-2xl) 0;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        width: 100%;
+        min-height: 48px;
+    }
+}

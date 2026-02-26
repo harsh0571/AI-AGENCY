@@ -1,0 +1,56 @@
+.sticky-cta {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #FF5722;
+    /* Orange/Red */
+    color: white;
+    padding: 12px 24px;
+    border-radius: 50px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 5px 20px rgba(255, 87, 34, 0.4);
+    cursor: pointer;
+    z-index: 1001;
+    /* Above navbar and other elements */
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.sticky-cta.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.sticky-cta:hover {
+    background-color: #F4511E;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 87, 34, 0.5);
+}
+
+@media (max-width: 768px) {
+    .sticky-cta {
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        border-radius: 0;
+        padding: 16px;
+        font-size: 1rem;
+        text-align: center;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        transform: translateY(100%);
+        /* Start off-screen down */
+    }
+
+    .sticky-cta.visible {
+        transform: translateY(0);
+    }
+
+    .sticky-cta:hover {
+        transform: translateY(0);
+        /* Disable hover lift on mobile */
+    }
+}

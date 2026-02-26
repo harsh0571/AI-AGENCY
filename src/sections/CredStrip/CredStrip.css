@@ -1,0 +1,35 @@
+.cred-strip {
+    padding: var(--space-xl) 0;
+    background: var(--light-bg);
+}
+
+.cred-strip__label {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--light-text-muted);
+    margin-bottom: var(--space-lg);
+}
+
+.cred-strip__logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xl);
+    flex-wrap: wrap;
+}
+
+.cred-strip__logo {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--light-text-muted);
+    letter-spacing: 0.05em;
+    opacity: 0.5;
+    transition: opacity var(--transition-base);
+}
+
+.cred-strip__logo:hover {
+    opacity: 1;
+}

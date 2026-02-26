@@ -1,0 +1,30 @@
+.sticky-cta {
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 900;
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    padding: 12px 24px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: var(--font-main);
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(236, 127, 19, 0.4);
+    transform: translateY(80px);
+    opacity: 0;
+    transition: all var(--transition-smooth);
+}
+
+.sticky-cta--visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.sticky-cta:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(236, 127, 19, 0.5);
+}

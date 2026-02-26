@@ -1,0 +1,67 @@
+.contact-section {
+    background: var(--text-main);
+    color: var(--white);
+    padding: 120px 0;
+    text-align: center;
+}
+
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-section h2 {
+    font-size: 3rem;
+    margin-bottom: 24px;
+}
+
+.contact-subtext {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.contact-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.btn-large {
+    padding: 18px 48px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+}
+
+.secondary-links {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.link-text {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.link-text:hover {
+    color: var(--white);
+    text-decoration: underline;
+}
+
+.divider {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .contact-section h2 {
+        font-size: 2.2rem;
+    }
+}

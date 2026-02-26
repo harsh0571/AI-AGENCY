@@ -1,0 +1,54 @@
+.admin-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    background: var(--dark-surface-elevated);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--dark-border);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    backdrop-filter: var(--glass-blur);
+    transition: var(--transition-base);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-family: var(--font-main);
+}
+
+.admin-toggle:hover {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.admin-toggle--active {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+    box-shadow: var(--glow-primary);
+    padding: 12px 20px 12px 14px;
+}
+
+.admin-toggle--active:hover {
+    background: var(--accent-hover);
+}
+
+.admin-toggle__icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.4s ease;
+}
+
+.admin-toggle:hover .admin-toggle__icon {
+    transform: rotate(30deg);
+}
+
+.admin-toggle__label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}

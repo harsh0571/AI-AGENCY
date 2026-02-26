@@ -1,0 +1,128 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: all var(--transition-base);
+    background: transparent;
+}
+
+.navbar--scrolled {
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(16px);
+    padding: 14px 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+}
+
+.navbar__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: white;
+}
+
+.navbar__logo-icon {
+    flex-shrink: 0;
+}
+
+.navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navbar__links a {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+    transition: color var(--transition-fast);
+    letter-spacing: 0.02em;
+}
+
+.navbar__links a:hover {
+    color: white;
+}
+
+.navbar__cta {
+    padding: 10px 22px !important;
+    font-size: 0.85rem !important;
+    min-height: 40px !important;
+    border-radius: var(--radius-sm) !important;
+}
+
+/* Hamburger */
+.navbar__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1001;
+}
+
+.navbar__hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all var(--transition-base);
+}
+
+.navbar__hamburger--open span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar__hamburger--open span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar__hamburger--open span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 768px) {
+    .navbar__hamburger {
+        display: flex;
+    }
+
+    .navbar__links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        max-width: 300px;
+        height: 100vh;
+        background: var(--dark-bg);
+        flex-direction: column;
+        justify-content: center;
+        gap: 28px;
+        transition: right var(--transition-smooth);
+        border-left: 1px solid var(--dark-border);
+    }
+
+    .navbar__links--open {
+        right: 0;
+    }
+
+    .navbar__links a {
+        font-size: 1.1rem;
+    }
+
+    .navbar__cta {
+        width: 80% !important;
+    }
+}

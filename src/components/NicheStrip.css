@@ -1,0 +1,70 @@
+.niche-strip {
+    background-color: var(--white);
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.niche-headline {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+    letter-spacing: 0.02em;
+}
+
+.niche-headline strong {
+    color: var(--text-main);
+    font-weight: 600;
+}
+
+.badges-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.niche-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    padding: 8px 16px;
+    background: var(--bg-color);
+    border-radius: 50px;
+    transition: transform 0.2s ease;
+}
+
+.niche-badge:hover {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+}
+
+.vertical-divider {
+    width: 1px;
+    height: 24px;
+    background-color: var(--border-color);
+}
+
+@media (max-width: 768px) {
+    .badges-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .vertical-divider {
+        display: none;
+    }
+
+    .niche-badge {
+        width: 100%;
+        justify-content: center;
+    }
+}

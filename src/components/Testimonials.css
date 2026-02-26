@@ -1,0 +1,150 @@
+.testimonials-section {
+    background: #fdfdfd;
+    padding: 100px 0;
+}
+
+.social-proof-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+/* Stats Column */
+.stats-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.stats-badges {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-badge {
+    background: var(--white);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    text-align: center;
+}
+
+.stat-badge h3 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.stat-sub {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.viral-reel-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.reel-thumbnail {
+    background: #000;
+    height: 200px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 12px;
+    color: white;
+}
+
+.play-button {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.view-count {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.reel-caption {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Reviews Column */
+.reviews-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.testimonial-card.horizontal {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-color);
+    /* Accordion-style accent */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.review-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+    font-style: italic;
+    color: var(--text-main);
+}
+
+.reviewer-meta h4 {
+    font-size: 1rem;
+    margin-bottom: 2px;
+}
+
+.reviewer-meta span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+    .social-proof-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .stats-badges {
+        flex-direction: row;
+    }
+}

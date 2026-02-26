@@ -1,0 +1,93 @@
+.lead-magnet-section {
+    background-color: #FDF2F0;
+    /* Very light orange/red tint to stand out but be subtle */
+    padding: 30px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.magnet-container {
+    max-width: 1000px;
+}
+
+.magnet-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.magnet-text {
+    flex: 1;
+}
+
+.magnet-text h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: #BF360C;
+    /* Darker orange/red for contrast */
+}
+
+.magnet-text p {
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    color: var(--text-secondary);
+}
+
+.magnet-form {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.magnet-form input {
+    padding: 10px 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    min-width: 250px;
+    font-family: inherit;
+}
+
+.magnet-form input:focus {
+    outline: none;
+    border-color: #FF5722;
+}
+
+.magnet-form button {
+    background-color: #FF5722;
+    border: none;
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+
+.magnet-form button:hover {
+    background-color: #F4511E;
+}
+
+.magnet-success {
+    text-align: center;
+    color: #4CAF50;
+    font-weight: 500;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .magnet-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .magnet-form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .magnet-form input {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .magnet-form button {
+        width: 100%;
+    }
+}
