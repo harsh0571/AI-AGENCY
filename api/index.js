@@ -1,5 +1,4 @@
 import express from 'express';
-import multer from 'multer';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { v2 as cloudinary } from 'cloudinary';
@@ -7,70 +6,55 @@ import { v2 as cloudinary } from 'cloudinary';
 dotenv.config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 app.use(cors());
 app.use(express.json());
 
-// Configure Cloudinary using Environment Variables
+// Configure Cloudinary
 cloudinary.config({
     cloud_name: process.env.VITE_CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// Configure Multer to use Memory Storage
-// This is required for serverless deployments (like Vercel) which do not have a writable file system.
-const storage = multer.memoryStorage();
-const upload = multer({ storage });
-
-// API Endpoint to handle video upload to Cloudinary
-app.post('/api/upload', upload.single('video'), async (req, res) => {
-    if (!req.file) {
-        return res.status(400).json({ error: 'No video file provided' });
-    }
-
+// Endpoint to generate a secure signature for direct-to-Cloudinary uploads
+app.post('/api/get-signature', async (req, res) => {
     const slotId = req.body.slotId || 'unnamed-slot';
+    const timestamp = Math.round((new Date).getTime() / 1000);
+
+    // We want to force a unique public_id so Cloudinary doesn't cache it aggressively
+    const publicId = `${slotId}-${Date.now()}`;
+    const folder = 'marketing-agency-videos';
 
     try {
-        // Stream the file buffer directly from memory to Cloudinary
-        const uploadResponse = await new Promise((resolve, reject) => {
-            const uploadStream = cloudinary.uploader.upload_stream(
-                {
-                    resource_type: 'video',
-                    folder: 'marketing-agency-videos', // Cloudinary folder name
-                    public_id: `${slotId}-${Date.now()}`, // Ensure a unique filename each time to bypass caching
-                    overwrite: true
-                },
-                (error, result) => {
-                    if (error) reject(error);
-                    else resolve(result);
-                }
-            );
+        // Create the signature using our hidden API Secret
+        const signature = cloudinary.utils.api_sign_request({
+            timestamp: timestamp,
+            folder: folder,
+            public_id: publicId,
+            resource_type: 'video', // Must match the upload type
+            overwrite: true
+        }, process.env.CLOUDINARY_API_SECRET);
 
-            // Write the buffer to the stream
-            uploadStream.end(req.file.buffer);
-        });
-
-        // Cloudinary returns a global permanent URL (`secure_url`)
         res.json({
-            success: true,
-            message: 'Video uploaded successfully to Cloudinary',
-            url: uploadResponse.secure_url,
-            slotId: slotId
+            signature,
+            timestamp,
+            publicId,
+            folder,
+            cloudName: process.env.VITE_CLOUDINARY_CLOUD_NAME,
+            apiKey: process.env.CLOUDINARY_API_KEY
         });
-
     } catch (err) {
-        console.error('Error uploading to Cloudinary:', err);
-        return res.status(500).json({ error: 'Failed to upload video to cloud' });
+        console.error("Error generating Cloudinary signature:", err);
+        res.status(500).json({ error: 'Failed to generate upload signature' });
     }
 });
 
 // Vercel Serverless Check
-// Only listen to port if running locally via `node server.js`
-if (process.env.NODE_ENV !== 'production' || process.argv[1]?.includes('server.js')) {
+if (process.env.NODE_ENV !== 'production' || process.argv[1]?.includes('index.js')) {
     app.listen(PORT, () => {
-        console.log(`Upload server running on http://localhost:${PORT}`);
+        console.log(`Signature server running on http://localhost:${PORT}`);
     });
 }
 

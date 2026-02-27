@@ -54,37 +54,51 @@ export const AdminProvider = ({ children }) => {
     }, []);
 
     const setVideo = useCallback(async (slotId, file) => {
-        // Optimistically show a loading state or temporary URL if desired,
-        // but for now we'll just wait for the upload to complete.
-
-        const formData = new FormData();
-        // Append slotId FIRST so multer parses it before the file stream starts
-        formData.append('slotId', slotId);
-        formData.append('video', file);
+        // Optimistically show a loading state if desired
 
         try {
-            const response = await fetch('/api/upload', {
+            // STEP 1: Get secure upload signature from our backend
+            const sigResponse = await fetch('/api/get-signature', {
                 method: 'POST',
-                body: formData,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ slotId })
             });
 
-            if (!response.ok) {
-                throw new Error(`Upload failed with status ${response.status}`);
+            if (!sigResponse.ok) {
+                throw new Error("Failed to get upload signature from server.");
             }
 
-            const data = await response.json();
+            const { signature, timestamp, publicId, folder, cloudName, apiKey } = await sigResponse.json();
 
-            if (data.success) {
-                // Determine persistent URL, adding a timestamp query param to bust cache
-                const persistentUrl = `${data.url}?t=${new Date().getTime()}`;
+            // STEP 2: Upload directly to Cloudinary using their REST API
+            const cloudinaryFormData = new FormData();
+            cloudinaryFormData.append("file", file);
+            cloudinaryFormData.append("api_key", apiKey);
+            cloudinaryFormData.append("timestamp", timestamp);
+            cloudinaryFormData.append("signature", signature);
+            cloudinaryFormData.append("folder", folder);
+            cloudinaryFormData.append("public_id", publicId);
+            cloudinaryFormData.append("resource_type", "video");
 
-                setVideos(prev => ({
-                    ...prev,
-                    [slotId]: { url: persistentUrl, name: file.name, isPersistent: true }
-                }));
-            } else {
-                throw new Error(data.error || "Upload failed");
+            const uploadResponse = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/video/upload`, {
+                method: "POST",
+                body: cloudinaryFormData
+            });
+
+            if (!uploadResponse.ok) {
+                const errData = await uploadResponse.json();
+                throw new Error(`Cloudinary Error: ${errData?.error?.message || uploadResponse.status}`);
             }
+
+            const data = await uploadResponse.json();
+
+            // Determine persistent URL, adding a timestamp query param to bust cache
+            const persistentUrl = `${data.secure_url}?t=${new Date().getTime()}`;
+
+            setVideos(prev => ({
+                ...prev,
+                [slotId]: { url: persistentUrl, name: file.name, isPersistent: true }
+            }));
 
         } catch (error) {
             console.error("Error uploading video:", error);
