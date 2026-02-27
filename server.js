@@ -66,6 +66,13 @@ app.post('/api/upload', upload.single('video'), async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Upload server running on http://localhost:${PORT}`);
-});
+// Vercel Serverless Check
+// Only listen to port if running locally via `node server.js`
+if (process.env.NODE_ENV !== 'production' || process.argv[1]?.includes('server.js')) {
+    app.listen(PORT, () => {
+        console.log(`Upload server running on http://localhost:${PORT}`);
+    });
+}
+
+// Export for Vercel Serverless Function
+export default app;
