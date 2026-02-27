@@ -5,12 +5,22 @@ import './VideoSlot.css';
 const VideoSlot = ({ slotId, aspectRatio = '16/9', placeholderLabel = 'Video', className = '', fullCover = false }) => {
     const { isAdmin, videos, setVideo, removeVideo } = useAdmin();
     const fileInputRef = useRef(null);
+    const videoRef = useRef(null);
     const videoData = videos[slotId];
 
     const handleBrowse = () => fileInputRef.current?.click();
 
     const [isHovered, setIsHovered] = useState(false);
     const [isMuted, setIsMuted] = useState(true);
+
+    // Force autoplay on mount or URL change to fix React 'autoPlay' attribute bugs
+    React.useEffect(() => {
+        if (videoRef.current && videoData?.url) {
+            videoRef.current.play().catch(error => {
+                console.log("Autoplay blocked by browser policy:", error);
+            });
+        }
+    }, [videoData?.url, isMuted]);
 
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
@@ -46,7 +56,7 @@ const VideoSlot = ({ slotId, aspectRatio = '16/9', placeholderLabel = 'Video', c
             {videoData?.url ? (
                 <>
                     <video
-                        key={videoData.url}
+                        ref={videoRef}
                         className="video-slot__video"
                         src={videoData.url}
                         autoPlay
