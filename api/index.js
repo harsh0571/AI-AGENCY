@@ -29,12 +29,12 @@ app.post('/api/get-signature', async (req, res) => {
 
     try {
         // Create the signature using our hidden API Secret
+        // IMPORTANT: The parameters signed here MUST exactly match the 
+        // string parameters sent by the frontend FormData (excluding file & api_key).
         const signature = cloudinary.utils.api_sign_request({
             timestamp: timestamp,
             folder: folder,
-            public_id: publicId,
-            resource_type: 'video', // Must match the upload type
-            overwrite: true
+            public_id: publicId
         }, process.env.CLOUDINARY_API_SECRET);
 
         res.json({
