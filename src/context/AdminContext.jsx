@@ -102,7 +102,7 @@ export const AdminProvider = ({ children }) => {
 
         } catch (error) {
             console.error("Error uploading video:", error);
-            alert("Failed to save video to server. Is the backend running?");
+            alert(`Upload failed: ${error.message}`);
 
             // Fallback to local temporary blob if server upload fails
             const url = URL.createObjectURL(file);
